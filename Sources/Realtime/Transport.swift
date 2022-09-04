@@ -354,7 +354,7 @@ public class StarscreamTransport: NSObject, Transport, WebSocketDelegate {
 
   public func websocketDidDisconnect(socket _: WebSocketClient, error: Error?) {
     var closeCode:Int;
-    if let errorCode = (error as? WSError)?.code else{
+    if let errorCode = (error as? WSError)?.code{
       closeCode = Int(errorCode)
     }else{
       closeCode = Int(RealtimeClient.CloseCode.abnormal.rawValue)
