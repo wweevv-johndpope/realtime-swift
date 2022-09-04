@@ -281,6 +281,8 @@ public class URLSessionTransport: NSObject, Transport, URLSessionWebSocketDelega
 }
 
 public class StarscreamTransport: NSObject, Transport, WebSocketDelegate {
+
+    
   /// The URL to connect to
   private let url: URL
 
@@ -317,7 +319,11 @@ public class StarscreamTransport: NSObject, Transport, WebSocketDelegate {
     // Set the trasport state as connecting
     readyState = .connecting
 
-    let socket = WebSocket(url: url)
+      var request = URLRequest(url:url)
+      request.timeoutInterval = 5
+     let  socket = WebSocket(request: request)
+      
+
     socket.delegate = self
     socket.connect()
 
@@ -371,7 +377,10 @@ public class StarscreamTransport: NSObject, Transport, WebSocketDelegate {
     // the reconnect logic.
     delegate?.onClose(code: closeCode)
   }
-
+    public func didReceive(event: WebSocketEvent, client: WebSocket) {
+       // delegate?.onMessage(message: text)
+    
+    }
   public func websocketDidReceiveMessage(socket _: WebSocketClient, text: String) {
     delegate?.onMessage(message: text)
   }
