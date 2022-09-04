@@ -12,7 +12,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/wweevv-johndpope/Starscream.git", from: "3.0.0")
+    .package(url: "https://github.com/wweevv-johndpope/Starscream.git", from: "4.0.4-fix")
   ],
   targets: [
     .target(
