@@ -353,7 +353,13 @@ public class StarscreamTransport: NSObject, Transport, WebSocketDelegate {
   }
 
   public func websocketDidDisconnect(socket _: WebSocketClient, error: Error?) {
-    let closeCode = (error as? WSError)?.code ?? RealtimeClient.CloseCode.abnormal.rawValue
+    var closeCode:Int;
+    if let errorCode = (error as? WSError)?.code else{
+      closeCode = Int(errorCode)
+    }else{
+      closeCode = Int(RealtimeClient.CloseCode.abnormal.rawValue)
+    }
+    
     // Set the state of the Transport to closed
     readyState = .closed
 
